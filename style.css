@@ -1,0 +1,179 @@
+body{
+    margin: 0;
+    background-color: #1E1E1E;
+    text-align: center;
+}
+
+.menu{
+    position: absolute;
+    list-style: none;
+    margin: -185px 0 0 0;
+    padding: 0;
+    height: 370px;
+    width: 100%;
+    top: 50%;
+}
+
+.menu li{
+    margin: 20px;
+}
+
+.menu a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 50px;
+    line-height: 50px;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.little_menu{
+    position: absolute;
+    list-style: none;
+    margin: 20px 20px 0 0;
+    padding: 0;
+    top: 0;
+    right: 0;
+}
+
+.little_menu li{
+    margin: 10px;
+}
+
+.little_menu a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 25px;
+    line-height: 25px;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.balls{
+    position: absolute;
+    top: 60%;
+    margin-top: -33px;
+    left: 50%;
+    height: 56px;
+    background-color: #4c4c4c;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.balls.nine{
+    margin-left: -273px;
+    width: 536px;
+}
+
+.balls.height{
+    margin-left: -453px;
+    width: 896px;
+}
+
+.balls.snooker{
+    margin-left: -243px;
+    width: 476px;
+}
+
+.balls img{
+    height: 50px;
+    margin: 3px;
+    cursor: pointer;
+    border-radius: 100%;
+    opacity: 1;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -ms-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.balls img.inactive{
+    opacity: 0;
+}
+
+.score{
+    font-size: 130px;
+    color: #fff;
+    font-family: monospace;
+    line-height: 130px;
+    top: 40%;
+    position: absolute;
+    margin-top: -65px;
+    width: 100%;
+}
+
+.score .score_j{
+    cursor: pointer;
+}
+
+.score .player.inactive{
+    opacity: 0.5;
+}
+
+.score input{
+    font-size: 130px;
+    background-color: transparent;
+    color: white;
+    font-family: monospace;
+    border: none;
+    width: 140px;
+    text-align: center;
+}
+
+.break{
+    font-size: 70px;
+    color: #fff;
+    font-family: monospace;
+    line-height: 70px;
+    top: 75%;
+    position: absolute;
+    margin-top: -35px;
+    width: 100%;
+}
+
+.save{
+    font-size: 40px;
+    color: #fff;
+    font-family: monospace;
+    line-height: 40px;
+    top: 0;
+    position: absolute;
+    right: 0;
+    padding: 20px;
+    opacity: 0;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -ms-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.save.active{
+    opacity: 1;
+}
+
+.save a{
+    cursor: pointer;
+}
+
+.table_scores, .record{
+    position: relative;
+    color: #fff;
+    font-family: monospace;
+    font-size: 20px;
+    width: 50%;
+    left: 20%;
+    border-collapse: collapse;
+    empty-cells: hide;
+    margin: 5%;
+}
+
+.table_scores th, .table_scores td, .record th, .record td{
+    padding: 5px;
+    border: 1px solid #4c4c4c;
+}
+
+.table_scores td.looser{
+    color: #848484;
+}

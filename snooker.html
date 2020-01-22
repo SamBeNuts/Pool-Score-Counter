@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Samuel">
+    <meta name="description" content="Snooker">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snooker</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="balls snooker">
+    <img onclick="upScore(1)" src="images/ball3.png">
+    <img onclick="upScore(2)" src="images/ball4.png">
+    <img onclick="upScore(3)" src="images/ball5.png">
+    <img onclick="upScore(4)" src="images/ball6.png">
+    <img onclick="upScore(5)" src="images/ball7.png">
+    <img onclick="upScore(6)" src="images/ball8.png">
+    <img onclick="upScore(7)" src="images/ball9.png">
+    <img onclick="changePlayer();upScore(4);break_score.innerHTML = 0;" src="images/ballP.png">
+</div>
+<div class="score">
+    <a class="player">(<input class="J1" type="text" maxlength="2" value="J1" onkeyup="cookiePlayer(this.value, 'J1')">)</a>
+    <a class="player score_j" onclick="changePlayer()">0</a>
+    <a>-</a>
+    <a class="player score_j inactive" onclick="changePlayer()">0</a>
+    <a class="player inactive">(<input class="J2" type="text" maxlength="2" value="J2" onkeyup="cookiePlayer(this.value, 'J2')">)</a>
+</div>
+<div class="break">
+    <a>BREAK</a>
+    <a class="break_score">0</a>
+</div>
+<div class="save">
+    <a onclick="saveResult()">SAVE</a>
+</div>
+<script type="text/javascript">
+    let activePlayer = document.querySelector('.player.score_j');
+    let break_score = document.querySelector('.break_score');
+    let biggest_break = 0;
+    let player_biggest_break;
+
+    window.onload = function(){
+        if(localStorage.getItem('J1') !== null){
+            document.querySelector('.J1').value = localStorage.getItem('J1');
+        }
+        if(localStorage.getItem('J2') !== null){
+            document.querySelector('.J2').value = localStorage.getItem('J2');
+        }
+        checkSave();
+    };
+
+    function upScore(points){
+        activePlayer.innerHTML = parseInt(activePlayer.innerHTML) + points;
+        break_score.innerHTML = parseInt(break_score.innerHTML) + points;
+    }
+
+    function changePlayer(){
+        activePlayer = document.querySelector('.player.score_j.inactive');
+        let players = document.querySelectorAll('.player');
+        players.forEach(function(player){
+            player.classList.toggle('inactive');
+        });
+        if (parseInt(break_score.innerHTML) > biggest_break){
+            biggest_break = parseInt(break_score.innerHTML);
+            player_biggest_break = document.querySelector('.player.inactive input').value;
+        }
+        break_score.innerHTML = 0;
+    }
+
+    function cookiePlayer(value, key){
+        localStorage.setItem(key, value);
+        checkSave();
+    }
+
+    function checkSave(){
+        if(document.querySelector('.J1').value === 'Sa' && document.querySelector('.J2').value === 'Ri' || document.querySelector('.J1').value === 'Ri' && document.querySelector('.J2').value === 'Sa'){
+            document.querySelector('.save').classList.add('active');
+        }else{
+            document.querySelector('.save').classList.remove('active');
+        }
+    }
+
+    function saveResult(){
+        if (parseInt(break_score.innerHTML) > biggest_break){
+            biggest_break = parseInt(break_score.innerHTML);
+            player_biggest_break = document.querySelector('.player:not(.inactive) input').value;
+        }
+        if(localStorage.getItem('results_snooker') === null){
+            let results = new Array();
+            localStorage.setItem('results_snooker', JSON.stringify(results));
+        }
+        let results = JSON.parse(localStorage.getItem('results_snooker'));
+        let scores = document.querySelectorAll('.player.score_j');
+        if (document.querySelector('.J1').value === 'Sa') {
+            results.push([new Date(), parseInt(scores.item(0).innerHTML), parseInt(scores.item(1).innerHTML), player_biggest_break, biggest_break]);
+        }else{
+            results.push([new Date(), parseInt(scores.item(1).innerHTML), parseInt(scores.item(0).innerHTML), player_biggest_break, biggest_break]);
+        }
+        localStorage.setItem('results_snooker', JSON.stringify(results));
+        window.location.href = "scores_snooker.html";
+    }
+</script>
+</body>

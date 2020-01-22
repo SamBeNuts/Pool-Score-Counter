@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Samuel">
+    <meta name="description" content="9 Ball">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9 Ball</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="balls nine">
+    <img onclick="toggleState(this)" src="images/ball1.png">
+    <img onclick="toggleState(this)" src="images/ball2.png">
+    <img onclick="toggleState(this)" src="images/ball3.png">
+    <img onclick="toggleState(this)" src="images/ball4.png">
+    <img onclick="toggleState(this)" src="images/ball5.png">
+    <img onclick="toggleState(this)" src="images/ball6.png">
+    <img onclick="toggleState(this)" src="images/ball7.png">
+    <img onclick="toggleState(this)" src="images/ball8.png">
+    <img onclick="toggleState(this)" src="images/ball9.png">
+</div>
+<div class="score">
+    <a>(<input class="J1" type="text" maxlength="2" value="J1" onkeyup="cookiePlayer(this.value, 'J1')">)</a>
+    <a class="score_j" onclick="upScore(this)">0</a>
+    <a>-</a>
+    <a class="score_j" onclick="upScore(this)">0</a>
+    <a>(<input class="J2" type="text" maxlength="2" value="J2" onkeyup="cookiePlayer(this.value, 'J2')">)</a>
+</div>
+<div class="save">
+    <a onclick="saveResult()">SAVE</a>
+</div>
+<script type="text/javascript">
+    window.onload = function(){
+        if(localStorage.getItem('J1') !== null){
+            document.querySelector('.J1').value = localStorage.getItem('J1');
+        }
+        if(localStorage.getItem('J2') !== null){
+            document.querySelector('.J2').value = localStorage.getItem('J2');
+        }
+        checkSave();
+    };
+
+    function upScore(joueur){
+        joueur.innerHTML = parseInt(joueur.innerHTML) + 1;
+        restart();
+    }
+
+    function toggleState(ball){
+        ball.classList.toggle('inactive');
+    }
+
+    function cookiePlayer(value, key){
+        localStorage.setItem(key, value);
+        checkSave();
+    }
+
+    function restart(){
+        let balls = document.querySelectorAll('.balls img');
+        balls.forEach(function(ball){
+            ball.classList.remove('inactive');
+        });
+    }
+
+    function checkSave(){
+        if(document.querySelector('.J1').value === 'Sa' && document.querySelector('.J2').value === 'Ri' || document.querySelector('.J1').value === 'Ri' && document.querySelector('.J2').value === 'Sa'){
+            document.querySelector('.save').classList.add('active');
+        }else{
+            document.querySelector('.save').classList.remove('active');
+        }
+    }
+
+    function saveResult(){
+        if(localStorage.getItem('results_nine') === null){
+            let results = new Array();
+            localStorage.setItem('results_nine', JSON.stringify(results));
+        }
+        let results = JSON.parse(localStorage.getItem('results_nine'));
+        let scores = document.querySelectorAll('.score_j');
+        if (document.querySelector('.J1').value === 'Sa') {
+            results.push([new Date(), parseInt(scores.item(0).innerHTML), parseInt(scores.item(1).innerHTML)]);
+        }else{
+            results.push([new Date(), parseInt(scores.item(1).innerHTML), parseInt(scores.item(0).innerHTML)]);
+        }
+        localStorage.setItem('results_nine', JSON.stringify(results));
+        window.location.href = "scores_nine.html";
+    }
+</script>
+</body>

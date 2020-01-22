@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Samuel">
+    <meta name="description" content="Scores">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scores</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<ul class="little_menu">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="scores_snooker.html">Snooker</a></li>
+    <li><a href="scores_nine.html">9 Ball</a></li>
+    <li><a href="scores_height.html">8 Ball</a></li>
+</ul>
+<table class="record">
+    <tr>
+        <td style="border-top: none; border-left: none;"></td>
+        <th tabindex="1">Samuel</th>
+        <th>Richard</th>
+    </tr>
+</table>
+<table class="table_scores">
+    <tr>
+        <th>Date</th>
+        <th>Samuel</th>
+        <th>Richard</th>
+        <th>Break</th>
+    </tr>
+</table>
+<script type="text/javascript">
+    window.onload = function(){
+        let table_scores = document.querySelector('.table_scores');
+        let results = localStorage.getItem('results_snooker');
+        let record = document.querySelector('.record');
+        if (results === null) {
+            window.location.href = "index.html";
+        }else{
+            let nb_victory_sam = 0;
+            let nb_victory_richard = 0;
+            let best_sam = 0;
+            let best_richard = 0;
+            let best_break_sam = 0;
+            let best_break_richard = 0;
+            results = JSON.parse(results);
+            results = results.reverse();
+            results.forEach(function(el){
+                let date = new Date(el[0]);
+                if (best_sam < el[1]) best_sam = el[1];
+                if (best_richard < el[2]) best_richard = el[2];
+                if (best_break_sam < el[4] && el[3].substr(0,1) === 'S') best_break_sam = el[4];
+                if (best_break_sam < el[4] && el[3].substr(0,1) === 'R') best_break_richard = el[4];
+                let tr = "<tr><td>" + date.getDate() + '/' + ('0' + date.getMonth()).slice(-2) + '/' + date.getFullYear() + "</td><td";
+                if (el[1] < el[2]){
+                    tr += " class='looser'";
+                    nb_victory_richard += 1;
+                }
+                tr += ">" + el[1] + "</td><td";
+                if (el[1] > el[2]){
+                    tr += " class='looser'";
+                    nb_victory_sam += 1;
+                }
+                tr +=">" + el[2] + "</td><td>" + el[4] + " (" + el[3].substr(0,1) + ")</td></tr>";
+                table_scores.innerHTML += tr;
+            });
+            record.innerHTML += "<tr><th>Nombre de victoires</th><td>" + nb_victory_sam + "</td><td>" + nb_victory_richard + "</td></tr>";
+            record.innerHTML += "<tr><th>Meilleur score</th><td>" + best_sam + "</td><td>" + best_richard + "</td></tr>";
+            record.innerHTML += "<tr><th>Meilleur break</th><td>" + best_break_sam + "</td><td>" + best_break_richard + "</td></tr>";
+        }
+    };
+</script>
+</body>
