@@ -1,25 +1,22 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Samuel">
-    <meta name="description" content="Accueil">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-<ul class="menu">
-    <li><a href="snooker.html">Snooker</a></li>
-    <li><a href="9ball.html">9 Ball</a></li>
-    <li><a href="8ball.html">8 Ball</a></li>
-    <li><a onclick="random()">Random</a></li>
-    <li><a href="scores_snooker.html">Scores</a></li>
-</ul>
-<script type="text/javascript">
-    let menu = document.querySelectorAll('.menu a');
-    function random(){
-        window.location.href = menu.item(Math.floor(Math.random() * (menu.length-1))).href;
-    }
-</script>
-</body>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="Samuel">
+		<meta name="description" content="Homepage">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Homepage</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<div class="menu">
+			<a href="snooker/index.html">Snooker</a>
+			<a href="9ball/index.html">9 Ball</a>
+			<a href="8ball/index.html">8 Ball</a>
+			<a onclick="randomGame()">Random</a>
+			<span>●</span>
+			<a href="scores/index.html">Scores</a>
+		</div>
+	</body>
+</html>

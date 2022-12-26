@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="Samuel">
+		<meta name="description" content="Snooker">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Snooker</title>
+		<link rel="stylesheet" type="text/css" href="../style.css">
+	</head>
+	<body>
+		<div class="center">
+			<div class="score">
+				<a class="player name">(<input class="J1" type="text" maxlength="2" value="J1"
+					onkeyup="savePlayerName(this.value)">)</a>
+				<a class="player score_j" onclick="toggleActivePlayer()">0</a>
+				<a>-</a>
+				<a class="player score_j inactive" onclick="toggleActivePlayer()">0</a>
+				<a class="player name inactive">(<input class="J2" type="text" maxlength="2" value="J2"
+					onkeyup="savePlayerName(this.value, false)">)</a>
+			</div>
+			<div class="balls">
+				<img onclick="upScore(1)" src="../resources/red.png">
+				<img onclick="upScore(2)" src="../resources/yellow.png">
+				<img onclick="upScore(3)" src="../resources/green.png">
+				<img onclick="upScore(4)" src="../resources/brown.png">
+				<img onclick="upScore(5)" src="../resources/blue.png">
+				<img onclick="upScore(6)" src="../resources/pink.png">
+				<img onclick="upScore(7)" src="../resources/black.png">
+				<img onclick="addPenalty();" src="../resources/penalty.png">
+			</div>
+			<div class="break">
+				<a>BREAK</a>
+				<a class="break_score">0</a>
+			</div>
+		</div>
+		<div class="save">
+			<a onclick="saveResult('snooker')">SAVE</a>
+		</div>
+		<img class="revert" src="../resources/revert.png" onclick="revertLastAction()" />
+		<script src="../script.js"></script>
+		<script type="text/javascript">
+			window.onload = loadPlayerNames;
+		</script>
+	</body>
+</html>

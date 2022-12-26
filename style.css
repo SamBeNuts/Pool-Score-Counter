@@ -1,33 +1,43 @@
-body{
+html, body {
+	height: 100%;
+}
+
+body {
     margin: 0;
     background-color: #1E1E1E;
     text-align: center;
+	color: white;
 }
 
-.menu{
-    position: absolute;
-    list-style: none;
-    margin: -185px 0 0 0;
-    padding: 0;
-    height: 370px;
-    width: 100%;
-    top: 50%;
+a, input, span {
+	color: white;
+	text-decoration: none;
+	font-family: monospace;
 }
 
-.menu li{
+.menu {
+	height: 100%;
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 10px;
+}
+
+.menu li {
     margin: 20px;
 }
 
-.menu a{
-    color: #fff;
-    text-decoration: none;
-    font-size: 50px;
-    line-height: 50px;
-    font-family: monospace;
-    cursor: pointer;
+.menu a, .menu span {
+	text-decoration: none;
+	font-size: 50px;
+	line-height: 50px;
 }
 
-.little_menu{
+.menu a {
+	cursor: pointer;
+}
+
+.little_menu {
     position: absolute;
     list-style: none;
     margin: 20px 20px 0 0;
@@ -36,131 +46,111 @@ body{
     right: 0;
 }
 
-.little_menu li{
+.little_menu li {
     margin: 10px;
 }
 
-.little_menu a{
-    color: #fff;
+.little_menu a {
     text-decoration: none;
     font-size: 25px;
     line-height: 25px;
-    font-family: monospace;
     cursor: pointer;
 }
 
-.balls{
-    position: absolute;
-    top: 60%;
-    margin-top: -33px;
-    left: 50%;
-    height: 56px;
-    background-color: #4c4c4c;
-    border-radius: 25px;
-    padding: 5px;
+.center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	gap: 20px;
 }
 
-.balls.nine{
-    margin-left: -273px;
-    width: 536px;
+.score {
+	font-size: 130px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
 }
 
-.balls.height{
-    margin-left: -453px;
-    width: 896px;
+.score .player.name {
+	margin-bottom: 25px;
 }
 
-.balls.snooker{
-    margin-left: -243px;
-    width: 476px;
-}
-
-.balls img{
-    height: 50px;
-    margin: 3px;
-    cursor: pointer;
-    border-radius: 100%;
-    opacity: 1;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -ms-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-}
-
-.balls img.inactive{
-    opacity: 0;
-}
-
-.score{
-    font-size: 130px;
-    color: #fff;
-    font-family: monospace;
-    line-height: 130px;
-    top: 40%;
-    position: absolute;
-    margin-top: -65px;
-    width: 100%;
-}
-
-.score .score_j{
+.score .score_j {
     cursor: pointer;
 }
 
-.score .player.inactive{
+.score .player.inactive {
     opacity: 0.5;
 }
 
-.score input{
-    font-size: 130px;
+.score input {
+    font-size: 100px;
     background-color: transparent;
-    color: white;
-    font-family: monospace;
     border: none;
     width: 140px;
     text-align: center;
 }
 
-.break{
+.balls {
+	background-color: #4c4c4c;
+	border-radius: 25px;
+	padding: 8px;
+	padding-bottom: 4px;
+	width: fit-content;
+}
+
+.balls img {
+	height: 50px;
+	cursor: pointer;
+	border-radius: 100%;
+	opacity: 1;
+	margin: 3px;
+	-webkit-transition: 0.4s;
+	-moz-transition: 0.4s;
+	-ms-transition: 0.4s;
+	-o-transition: 0.4s;
+	transition: 0.4s;
+}
+
+.balls img.inactive {
+	opacity: 0;
+}
+
+.break {
     font-size: 70px;
-    color: #fff;
-    font-family: monospace;
-    line-height: 70px;
-    top: 75%;
-    position: absolute;
-    margin-top: -35px;
-    width: 100%;
 }
 
-.save{
+.save {
+	position: absolute;
+	top: 0;
+	right: 0;
     font-size: 40px;
-    color: #fff;
-    font-family: monospace;
-    line-height: 40px;
-    top: 0;
-    position: absolute;
-    right: 0;
     padding: 20px;
-    opacity: 0;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -ms-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
 }
 
-.save.active{
-    opacity: 1;
-}
-
-.save a{
+.save a, .revert {
     cursor: pointer;
 }
 
-.table_scores, .record{
+.revert {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 3px;
+	height: 80px;
+}
+
+label {
+	display: inline-block;
+	margin-top: 34px;
+	margin-left: 20px;
+}
+
+.table_results, .table_records {
     position: relative;
-    color: #fff;
-    font-family: monospace;
     font-size: 20px;
     width: 50%;
     left: 20%;
@@ -169,11 +159,18 @@ body{
     margin: 5%;
 }
 
-.table_scores th, .table_scores td, .record th, .record td{
+.table_results th, .table_results td, .table_records th, .table_records td {
     padding: 5px;
     border: 1px solid #4c4c4c;
 }
 
-.table_scores td.looser{
+.table_results td.looser {
     color: #848484;
+}
+
+.favorite {
+	width: 25px;
+	margin-left: 20px;
+	cursor: pointer;
+	vertical-align: bottom;
 }

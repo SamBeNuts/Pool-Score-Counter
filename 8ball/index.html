@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="Samuel">
+		<meta name="description" content="8 Ball">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>8 Ball</title>
+		<link rel="stylesheet" type="text/css" href="../style.css">
+	</head>
+	<body>
+		<div class="center">
+			<div class="score">
+				<a class="player name">(<input class="J1" type="text" maxlength="2" value="J1" 
+					onkeyup="savePlayerName(this.value)">)</a>
+				<a class="player score_j" onclick="upScore(1, false)">0</a>
+				<a>-</a>
+				<a class="player score_j" onclick="upScore(1, false, false)">0</a>
+				<a class="player name">(<input class="J2" type="text" maxlength="2" value="J2" 
+					onkeyup="savePlayerName(this.value, false)">)</a>
+			</div>
+			<div class="balls">
+				<img onclick="toggleBallVisibility(this)" src="../resources/red.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/red.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/red.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/red.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/red.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/red.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/red.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/yellow.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/yellow.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/yellow.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/yellow.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/yellow.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/yellow.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/yellow.png">
+				<img onclick="toggleBallVisibility(this)" src="../resources/black.png">
+			</div>
+		</div>
+		<div class="save">
+			<a onclick="saveResult('8ball')">SAVE</a>
+		</div>
+		<script src="../script.js"></script>
+		<script type="text/javascript">
+			window.onload = loadPlayerNames;
+		</script>
+	</body>
+</html>

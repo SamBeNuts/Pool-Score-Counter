@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="Samuel">
+		<meta name="description" content="Scores">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Scores</title>
+		<link rel="stylesheet" type="text/css" href="../style.css">
+	</head>
+	<body>
+		<label for="game">Game:</label>
+		<select id="game" name="game" onchange="setQueryParam('game', this.value)">
+			<option value="snooker">SNOOKER</option>
+			<option value="8ball">8 BALL</option>
+			<option value="9ball">9 BALL</option>
+		</select>
+		<label for="period">Period:</label>
+		<select id="period" name="period" onchange="setQueryParam('period', this.value)">
+			<option value="ALL">ALL</option>
+			<option value="YEAR">YEAR</option>
+			<option value="MONTH">MONTH</option>
+			<option value="WEEK">WEEK</option>
+		</select>
+		<label for="player">Player:</label>
+		<select id="player" name="player" onchange="setQueryParam('player', this.value)"></select>
+		<label for="opponent">Opponent:</label>
+		<select id="opponent" name="opponent" onchange="setQueryParam('opponent', this.value)"></select>
+		<img onclick="setFavorite()" class="favorite" src="../resources/outlined_star.png" />
+		<table class="table_records"></table>
+		<table class="table_results"></table>
+		<script src="script.js"></script>
+		<script type="text/javascript">
+			window.onload = loadScores();
+		</script>
+	</body>
+</html>
