@@ -234,5 +234,19 @@ const saveResult = (game) => {
 	}
 	results.push(result);
 	localStorage.setItem(RESULTS_STORAGE_PREFIX + game, JSON.stringify(results));
+	if (Math.max(scoreJ1, scoreJ2) >= 50) {
+		const bestPlayer = scoreJ1 > scoreJ2 ? ids[0] : ids[1];
+		if (bestPlayer === "Sa" || bestPlayer === "Ri") {
+			const video = document.querySelectorAll('video')[bestPlayer === "Sa" ? 0 : 1];
+			video.style.display = "block";
+			video.addEventListener("ended", () => setTimeout(() => navigateToScores(game, ids), 1000));
+			video.play();
+			return;
+		}
+	}
+	navigateToScores(game, ids);
+}
+
+const navigateToScores = (game, ids) => {
 	window.location.href = `../scores/index.html?game=${game}&period=ALL&player=${ids[0]}&opponent=${ids[1]}`;
 }

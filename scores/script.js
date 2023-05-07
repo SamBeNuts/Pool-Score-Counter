@@ -10,6 +10,8 @@ const ONE_YEAR = ONE_DAY * 365;
 selectDOM = document.querySelectorAll('select');
 recordsDOM = document.querySelector('.table_records');
 resultsDOM = document.querySelector('.table_results');
+detailsDOM = document.querySelector('.table_details');
+popupDOM = document.querySelector('.popup_details');
 
 let game;
 let period = ALL;
@@ -152,9 +154,50 @@ const populateResults = () => {
 				<td${leftCell.score <= rightCell.score ? ' class="looser"' : ''}>${leftCell.score} ${player === ALL ? `(${leftCell.id})` : ''}</td>
 				<td${leftCell.score >= rightCell.score ? ' class="looser"' : ''}>${rightCell.score} ${opponent === ALL ? `(${rightCell.id})` : ''}</td>
 				${game === SNOOKER ? `<td>${Math.max(leftCell.bestBreak ?? 0, rightCell.bestBreak ?? 0)} (${(leftCell.bestBreak ?? 0) > (rightCell.bestBreak ?? 0) ? leftCell.id : rightCell.id})</td>` : ''}
-				</tr>
+				${game === SNOOKER && score.breaks ? `<td><img onclick="populateDetails('${JSON.stringify(score.breaks).replace(/"/g,'\\\'')}')" class="info" src="../resources/info.png" /></td>` : ''}
+			</tr>
 		`;
 	});
+}
+
+const populateDetails = (breaks) => {
+	togglePopup();
+	detailsDOM.innerHTML = "";
+	breaks = JSON.parse(breaks.replace(/'/g,'"'));
+	breaks.forEach(breakDetails => {
+		detailsDOM.innerHTML += `
+			<tr>
+				<td>${breakDetails.id}</td>
+				<td>${breakDetails.break.map(ballId => `<img class="details_balls" src="../resources/${getBallName(ballId)}.png" />`).join("")}</td>
+			</tr>
+		`;
+	});
+}
+
+const togglePopup = () => {
+	popupDOM.style.display = popupDOM.style.display === "block" ? "none" : "block";
+}
+
+const getBallName = (ballId) => {
+	console.log(ballId)
+	switch (ballId) {
+		case 1:
+			return 'red';
+		case 2:
+			return 'yellow';
+		case 3:
+			return 'green';
+		case 4:
+			return 'brown';
+		case 5:
+			return 'blue';
+		case 6:
+			return 'pink';
+		case 7:
+			return 'black';
+		case 'P':
+			return 'penalty';
+	}
 }
 
 const convertPeriodToNumber = () => {

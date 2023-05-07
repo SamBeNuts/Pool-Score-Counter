@@ -155,7 +155,7 @@ label {
 	margin-left: 20px;
 }
 
-.table_results, .table_records {
+.table_results, .table_records, .table_details {
     position: relative;
     font-size: 20px;
     width: 50%;
@@ -165,7 +165,7 @@ label {
     margin: 5%;
 }
 
-.table_results th, .table_results td, .table_records th, .table_records td {
+.table_results th, .table_results td, .table_records th, .table_records td, .table_details td {
     padding: 5px;
     border: 1px solid #4c4c4c;
 }
@@ -179,4 +179,52 @@ label {
 	margin-left: 20px;
 	cursor: pointer;
 	vertical-align: bottom;
+}
+
+.info {
+	width: 20px;
+	cursor: pointer;
+	vertical-align: middle;
+	margin-top: -4px;
+	padding: 2px;
+}
+
+.details_balls {
+	position: relative;
+	width: 25px;
+	vertical-align: middle;
+	padding: 2px;
+}
+
+.table_details {
+	width: 70%;
+	left: 10%;
+}
+
+.popup_details {
+	background-color: #1E1E1E;
+	border: white 5px solid;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 60%;
+	transform: translate(-50%, -50%);
+	display: none;
+}
+
+.popup_details > img {
+	position: absolute;
+	cursor: pointer;
+	top: 15px;
+	right: 15px;
+	width: 30px;
+}
+
+video {
+	position: absolute;
+	display: none;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	transform: translate(-50%, -50%);
 }
