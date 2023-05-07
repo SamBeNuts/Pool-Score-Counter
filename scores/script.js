@@ -24,6 +24,7 @@ const getStats = (id) => {
 	let stats = {
 		victoryCount: 0,
 		longestVictoryStreak: 0,
+		bestScore: 0,
 		bestBreak: 0,
 		averageBestBreak: 0,
 		averageBreak: 0,
@@ -43,6 +44,7 @@ const getStats = (id) => {
 		}
 		if (game === SNOOKER) {
 			if (player.bestBreak !== undefined) {
+				stats.bestScore = Math.max(stats.bestScore, player.score);
 				stats.bestBreak = Math.max(stats.bestBreak, player.bestBreak);
 				stats.averageBestBreak += player.bestBreak;
 			} else {
@@ -95,6 +97,13 @@ const populateRecords = () => {
 	if (game === SNOOKER) {
 		recordsDOM.innerHTML += `
 			<tr>
+				<th>Best score</th>
+				<td>${playerStats.bestScore}</td>
+				${opponent !== ALL ? `<td>${opponentStats.bestScore}</td>` : ''}
+			</tr>
+		`;
+		recordsDOM.innerHTML += `
+			<tr>
 				<th>Best break</th>
 				<td>${playerStats.bestBreak}</td>
 				${opponent !== ALL ? `<td>${opponentStats.bestBreak}</td>` : ''}
@@ -142,7 +151,7 @@ const populateResults = () => {
 				<td>${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}</td>
 				<td${leftCell.score <= rightCell.score ? ' class="looser"' : ''}>${leftCell.score} ${player === ALL ? `(${leftCell.id})` : ''}</td>
 				<td${leftCell.score >= rightCell.score ? ' class="looser"' : ''}>${rightCell.score} ${opponent === ALL ? `(${rightCell.id})` : ''}</td>
-				${game === SNOOKER ? `<td>${Math.max(leftCell.bestBreak, rightCell.bestBreak)} (${leftCell.bestBreak > rightCell.bestBreak ? leftCell.id : rightCell.id})</td>` : ''}
+				${game === SNOOKER ? `<td>${Math.max(leftCell.bestBreak ?? 0, rightCell.bestBreak ?? 0)} (${(leftCell.bestBreak ?? 0) > (rightCell.bestBreak ?? 0) ? leftCell.id : rightCell.id})</td>` : ''}
 				</tr>
 		`;
 	});

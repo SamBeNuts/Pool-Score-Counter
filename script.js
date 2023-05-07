@@ -66,7 +66,7 @@ const updateUI = (isSnooker = true) => {
 	playersDOM[1].innerHTML = scoreJ2;
 	if (isSnooker) {
 		if (isJ1Active === playersDOM[0].classList.contains(INACTIVE_CLASS)) {
-			playersDOM.forEach(player => player.classList.toggle(INACTIVE_CLASS));
+			document.querySelectorAll('.player').forEach(player => player.classList.toggle(INACTIVE_CLASS));
 		}
 		breakScoreDOM.innerHTML = breakScore;
 	}
