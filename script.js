@@ -25,13 +25,13 @@ let history = [J1]
 const randomGame = () => {
 	switch (Math.floor(Math.random() * 3)) {
 		case 0:
-			window.location.href = '8ball/game.html'
+			window.location.href = '8ball/index.html'
 			break;
 		case 1:
-			window.location.href = '9ball/game.html'
+			window.location.href = '9ball/index.html'
 			break;
 		case 2:
-			window.location.href = 'snooker/game.html'
+			window.location.href = 'snooker/index.html'
 			break;
 	}
 }
@@ -237,9 +237,11 @@ const saveResult = (game) => {
 	if (Math.max(scoreJ1, scoreJ2) >= 50) {
 		const bestPlayer = scoreJ1 > scoreJ2 ? ids[0] : ids[1];
 		if (bestPlayer === "Sa" || bestPlayer === "Ri") {
-			const video = document.querySelectorAll('video')[bestPlayer === "Sa" ? 0 : 1];
+			const video = document.querySelector('video');
 			video.style.display = "block";
+			video.firstElementChild.src = "../resources/congrats_" + bestPlayer + Math.ceil(Math.random() * (bestPlayer === "Sa" ? 8 : 9));
 			video.addEventListener("ended", () => setTimeout(() => navigateToScores(game, ids), 1000));
+			video.load();
 			video.play();
 			return;
 		}
